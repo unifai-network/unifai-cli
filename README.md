@@ -1,0 +1,128 @@
+# unifai-cli
+
+A Go CLI for Unifai actions with first-class support for:
+
+- `search_services` via `ucli search`
+- `invoke_service` via `ucli invoke`
+
+Default API endpoint:
+
+- `https://app.uniclaw.ai/api/v1/unifai`
+
+## Commands
+
+- `ucli search --query "swap usdc to sol" --limit 10 --offset 0 --include-actions a,b`
+- `ucli invoke --action "Meteora--29--..." --payload '{"x":1}' --max-retries 1`
+- `ucli config init`
+- `ucli config show`
+- `ucli version`
+
+## Auth and Config Priority
+
+API key source priority (high to low):
+
+1. `--api-key`
+2. `UNIFAI_AGENT_API_KEY`
+3. `~/.config/unifai-cli/config.yaml`
+
+Generate config template:
+
+```bash
+ucli config init
+```
+
+Show effective config and source:
+
+```bash
+ucli config show
+```
+
+Reference template: `configs/config.example.yaml`
+
+## Payload Compatibility
+
+`invoke` supports both payload object and payload string to match current TS behavior differences.
+
+- Inline JSON: `--payload '{"a":1}'`
+- Read from file: `--payload @payload.json`
+- Force parsing mode: `--payload-format auto|object|string`
+
+Behavior:
+
+- `auto` (default): valid JSON -> object; otherwise -> raw string
+- `object`: payload must be valid JSON
+- `string`: payload is sent as string
+
+## Retries and Timeout
+
+- `--max-retries` (default: `1`)
+- Exponential backoff: `1s`, `2s`, `4s`, ...
+- `--timeout` (default: `50s`)
+- Retry only on network failures and HTTP `5xx`
+
+## Output and Exit Codes
+
+- Default output: concise human-readable
+- `--json`: raw API response
+- Exit codes:
+  - `0`: success
+  - `1`: API/runtime error
+  - `2`: argument/usage error
+
+`invoke` default rendering normalizes result:
+
+- If response has `payload`, print `payload`
+- Otherwise print full response
+
+## Build and Test
+
+```bash
+make tidy
+make test
+make build
+```
+
+Binary output:
+
+- `bin/ucli`
+
+## Install
+
+### Homebrew
+
+```bash
+brew tap unifai-network/homebrew-unifai-cli
+brew install ucli
+```
+
+## Release
+
+### Local
+
+```bash
+# Snapshot package (no GitHub release)
+./scripts/release.sh --snapshot
+
+# Real release
+./scripts/release.sh
+```
+
+### GitHub Actions
+
+Workflow file: `.github/workflows/release.yml`
+
+Trigger by pushing a tag:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+GoReleaser config: `.goreleaser.yaml`
+
+### Homebrew release setup (maintainer)
+
+1. Create tap repo: `unifai-network/homebrew-unifai-cli` (with `main` branch).
+2. Add repository secret `HOMEBREW_TAP_GITHUB_TOKEN` in `unifai-cli` GitHub Actions.
+3. Ensure the token can write to `unifai-network/homebrew-unifai-cli`.
+4. Push a tag (for example `v0.1.0`) to trigger release.

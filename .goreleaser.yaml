@@ -1,0 +1,55 @@
+version: 2
+
+project_name: ucli
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ucli
+    main: ./cmd/ucli
+    binary: ucli
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X unifai-cli/internal/version.Version={{ .Version }} -X unifai-cli/internal/version.Commit={{ .Commit }} -X unifai-cli/internal/version.BuildDate={{ .Date }}
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: checksums.txt
+
+brews:
+  - name: ucli
+    repository:
+      owner: unifai-network
+      name: homebrew-unifai-cli
+      branch: main
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/unifai/unifai-cli"
+    description: "CLI for Unifai search_services and invoke_service"
+    license: "MIT"
+    test: |
+      system "#{bin}/ucli", "version"
+
+changelog:
+  use: git
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
