@@ -16,4 +16,6 @@ if [[ -z "${HOMEBREW_TAP_GITHUB_TOKEN:-}" ]]; then
   exit 1
 fi
 
+export GITHUB_TOKEN="${GITHUB_TOKEN:-$HOMEBREW_TAP_GITHUB_TOKEN}"
+
 goreleaser release --clean

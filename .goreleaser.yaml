@@ -32,6 +32,12 @@ archives:
 checksum:
   name_template: checksums.txt
 
+release:
+  github:
+    owner: unifai-network
+    name: homebrew-unifai-cli
+  replace_existing_artifacts: true
+
 brews:
   - name: ucli
     repository:
@@ -40,7 +46,7 @@ brews:
       branch: main
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     directory: Formula
-    homepage: "https://github.com/unifai/unifai-cli"
+    homepage: "https://github.com/unifai-network/homebrew-unifai-cli"
     description: "CLI for Unifai search_services and invoke_service"
     license: "MIT"
     test: |

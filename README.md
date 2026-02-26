@@ -120,6 +120,12 @@ git push origin v0.1.0
 
 GoReleaser config: `.goreleaser.yaml`
 
+Release artifacts are published to:
+
+- `https://github.com/unifai-network/homebrew-unifai-cli/releases`
+
+This is required when `unifai-cli` source repository is private, so Homebrew can download assets anonymously.
+
 ### Homebrew release setup (maintainer)
 
 1. Create tap repo: `unifai-network/homebrew-unifai-cli` (with `main` branch).
