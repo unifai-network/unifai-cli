@@ -7,15 +7,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"unifai-cli/internal/config"
-	clierrors "unifai-cli/internal/errors"
-	"unifai-cli/internal/output"
+	"unifai/internal/config"
+	clierrors "unifai/internal/errors"
+	"unifai/internal/output"
 )
 
 func newConfigCommand(global *GlobalOptions) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "config",
-		Short: "Manage ucli configuration",
+		Short: "Manage unifai configuration",
 	}
 
 	cmd.AddCommand(newConfigInitCommand(global))

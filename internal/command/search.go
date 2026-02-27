@@ -5,9 +5,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	clierrors "unifai-cli/internal/errors"
-	"unifai-cli/internal/output"
-	"unifai-cli/internal/unifai"
+	clierrors "unifai/internal/errors"
+	"unifai/internal/output"
+	"unifai/internal/unifai"
 )
 
 func newSearchCommand(global *GlobalOptions) *cobra.Command {

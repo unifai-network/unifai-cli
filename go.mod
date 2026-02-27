@@ -1,4 +1,4 @@
-module unifai-cli
+module unifai
 
 go 1.20
 

@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"unifai-cli/internal/command"
-	clierrors "unifai-cli/internal/errors"
+	"unifai/internal/command"
+	clierrors "unifai/internal/errors"
 )
 
 func Run(args []string) int {

@@ -2,8 +2,8 @@
 
 A Go CLI for Unifai actions with first-class support for:
 
-- `search_services` via `ucli search`
-- `invoke_service` via `ucli invoke`
+- `search_services` via `unifai search`
+- `invoke_service` via `unifai invoke`
 
 Default API endpoint:
 
@@ -11,11 +11,11 @@ Default API endpoint:
 
 ## Commands
 
-- `ucli search --query "swap usdc to sol" --limit 10 --offset 0 --include-actions a,b`
-- `ucli invoke --action "Meteora--29--..." --payload '{"x":1}' --max-retries 1`
-- `ucli config init`
-- `ucli config show`
-- `ucli version`
+- `unifai search --query "swap usdc to sol" --limit 10 --offset 0 --include-actions a,b`
+- `unifai invoke --action "Meteora--29--..." --payload '{"x":1}' --max-retries 1`
+- `unifai config init`
+- `unifai config show`
+- `unifai version`
 
 ## Auth and Config Priority
 
@@ -28,13 +28,13 @@ API key source priority (high to low):
 Generate config template:
 
 ```bash
-ucli config init
+unifai config init
 ```
 
 Show effective config and source:
 
 ```bash
-ucli config show
+unifai config show
 ```
 
 Reference template: `configs/config.example.yaml`
@@ -84,7 +84,7 @@ make build
 
 Binary output:
 
-- `bin/ucli`
+- `bin/unifai`
 
 ## Install
 
@@ -92,7 +92,7 @@ Binary output:
 
 ```bash
 brew tap unifai-network/homebrew-unifai-cli
-brew install ucli
+brew install unifai
 ```
 
 ## Release

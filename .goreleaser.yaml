@@ -1,15 +1,15 @@
 version: 2
 
-project_name: ucli
+project_name: unifai
 
 before:
   hooks:
     - go mod tidy
 
 builds:
-  - id: ucli
-    main: ./cmd/ucli
-    binary: ucli
+  - id: unifai
+    main: ./cmd/unifai
+    binary: unifai
     env:
       - CGO_ENABLED=0
     goos:
@@ -20,7 +20,7 @@ builds:
       - amd64
       - arm64
     ldflags:
-      - -s -w -X unifai-cli/internal/version.Version={{ .Version }} -X unifai-cli/internal/version.Commit={{ .Commit }} -X unifai-cli/internal/version.BuildDate={{ .Date }}
+      - -s -w -X unifai/internal/version.Version={{ .Version }} -X unifai/internal/version.Commit={{ .Commit }} -X unifai/internal/version.BuildDate={{ .Date }}
 
 archives:
   - id: default
@@ -39,7 +39,7 @@ release:
   replace_existing_artifacts: true
 
 brews:
-  - name: ucli
+  - name: unifai
     repository:
       owner: unifai-network
       name: homebrew-unifai-cli
@@ -50,7 +50,7 @@ brews:
     description: "CLI for Unifai search_services and invoke_service"
     license: "MIT"
     test: |
-      system "#{bin}/ucli", "version"
+      system "#{bin}/unifai", "version"
 
 changelog:
   use: git

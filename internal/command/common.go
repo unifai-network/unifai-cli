@@ -3,8 +3,8 @@ package command
 import (
 	"strings"
 
-	"unifai-cli/internal/config"
-	clierrors "unifai-cli/internal/errors"
+	"unifai/internal/config"
+	clierrors "unifai/internal/errors"
 )
 
 func loadConfig(opts *GlobalOptions, requireAPIKey bool) (config.EffectiveConfig, error) {

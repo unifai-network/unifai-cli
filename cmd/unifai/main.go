@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"unifai-cli/internal/app"
+	"unifai/internal/app"
 )
 
 func main() {

@@ -10,10 +10,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	clierrors "unifai-cli/internal/errors"
-	"unifai-cli/internal/output"
-	"unifai-cli/internal/retry"
-	"unifai-cli/internal/unifai"
+	clierrors "unifai/internal/errors"
+	"unifai/internal/output"
+	"unifai/internal/retry"
+	"unifai/internal/unifai"
 )
 
 func newInvokeCommand(global *GlobalOptions) *cobra.Command {

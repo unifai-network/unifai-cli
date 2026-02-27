@@ -1,5 +1,5 @@
 ---
-name: ucli
+name: unifai
 description: Unifai CLI for searching and invoking blockchain services across multiple chains including Solana, Base, and Ethereum.
 version: 1.0.0
 metadata:
@@ -8,24 +8,24 @@ metadata:
       env:
         - UNIFAI_AGENT_API_KEY
       bins:
-        - ucli
+        - unifai
     primaryEnv: UNIFAI_AGENT_API_KEY
     emoji: "🦄"
     homepage: https://github.com/unifai-network/unifai-cli
     install:
       - kind: brew
         tap: unifai-network/homebrew-unifai-cli
-        formula: ucli
-        bins: [ucli]
+        formula: unifai
+        bins: [unifai]
 ---
 
-# ucli
+# unifai
 
 A Go CLI for Unifai actions with first-class support for searching and invoking blockchain services across multiple chains.
 
 ## What it does
 
-ucli enables you to:
+unifai enables you to:
 
 - **Search services**: Find blockchain services and actions using natural language queries
 - **Invoke services**: Execute blockchain actions with customizable parameters and retry logic
@@ -40,8 +40,8 @@ Default API endpoint: `https://app.uniclaw.ai/api/v1/unifai`
 ```bash
 brew update
 brew tap unifai-network/homebrew-unifai-cli
-brew install ucli
-ucli version
+brew install unifai
+unifai version
 ```
 
 ## Authentication
@@ -57,13 +57,13 @@ API key source priority (highest to lowest):
 Generate a config template:
 
 ```bash
-ucli config init
+unifai config init
 ```
 
 Show effective configuration:
 
 ```bash
-ucli config show
+unifai config show
 ```
 
 ## Usage Examples
@@ -74,13 +74,13 @@ Search for blockchain services using natural language:
 
 ```bash
 # Basic search
-ucli search --query "swap usdc to sol"
+unifai search --query "swap usdc to sol"
 
 # Search with pagination
-ucli search --query "transfer tokens" --limit 10 --offset 0
+unifai search --query "transfer tokens" --limit 10 --offset 0
 
 # Include specific actions
-ucli search --query "defi protocols" --include-actions action1,action2
+unifai search --query "defi protocols" --include-actions action1,action2
 ```
 
 ### Invoke Services
@@ -89,18 +89,18 @@ Execute blockchain actions with JSON payloads:
 
 ```bash
 # Inline JSON payload
-ucli invoke --action "Meteora--29--swap" --payload '{"amount":100}'
+unifai invoke --action "Meteora--29--swap" --payload '{"amount":100}'
 
 # Read payload from file
-ucli invoke --action "MyAction--1--execute" --payload @payload.json
+unifai invoke --action "MyAction--1--execute" --payload @payload.json
 
 # With custom retries and timeout
-ucli invoke --action "MyAction--1--execute" --payload '{"x":1}' --max-retries 3 --timeout 60s
+unifai invoke --action "MyAction--1--execute" --payload '{"x":1}' --max-retries 3 --timeout 60s
 ```
 
 ### Payload Formats
 
-ucli supports flexible payload handling:
+unifai supports flexible payload handling:
 
 - **auto** (default): Parses valid JSON as object, otherwise treats as string
 - **object**: Forces JSON object parsing
@@ -108,20 +108,20 @@ ucli supports flexible payload handling:
 
 ```bash
 # Force object parsing
-ucli invoke --action "MyAction" --payload '{"key":"value"}' --payload-format object
+unifai invoke --action "MyAction" --payload '{"key":"value"}' --payload-format object
 
 # Force string parsing
-ucli invoke --action "MyAction" --payload "raw text" --payload-format string
+unifai invoke --action "MyAction" --payload "raw text" --payload-format string
 ```
 
 ### Output Formats
 
 ```bash
 # Human-readable output (default)
-ucli search --query "swap tokens"
+unifai search --query "swap tokens"
 
 # JSON output for scripting
-ucli search --query "swap tokens" --json
+unifai search --query "swap tokens" --json
 ```
 
 ## Configuration
@@ -155,26 +155,26 @@ endpoint: https://app.uniclaw.ai/api/v1/unifai
 ### Swap Tokens on Solana
 
 ```bash
-ucli search --query "swap usdc to sol on solana"
-ucli invoke --action "Meteora--29--swap" --payload '{"fromToken":"USDC","toToken":"SOL","amount":100}'
+unifai search --query "swap usdc to sol on solana"
+unifai invoke --action "Meteora--29--swap" --payload '{"fromToken":"USDC","toToken":"SOL","amount":100}'
 ```
 
 ### Bridge Assets
 
 ```bash
-ucli search --query "bridge eth to base"
-ucli invoke --action "Bridge--1--transfer" --payload '{"chain":"base","amount":0.1}'
+unifai search --query "bridge eth to base"
+unifai invoke --action "Bridge--1--transfer" --payload '{"chain":"base","amount":0.1}'
 ```
 
 ### Check Service Status
 
 ```bash
-ucli search --query "protocol health check" --json
+unifai search --query "protocol health check" --json
 ```
 
 ## When to Use This Skill
 
-Use ucli when you need to:
+Use unifai when you need to:
 
 - Search for blockchain services and actions across multiple chains
 - Execute on-chain transactions programmatically
@@ -187,19 +187,19 @@ Use ucli when you need to:
 ### Custom Timeouts
 
 ```bash
-ucli invoke --action "LongRunning--1--process" --payload '{}' --timeout 120s
+unifai invoke --action "LongRunning--1--process" --payload '{}' --timeout 120s
 ```
 
 ### Retry Configuration
 
 ```bash
-ucli invoke --action "Unreliable--1--call" --payload '{}' --max-retries 5
+unifai invoke --action "Unreliable--1--call" --payload '{}' --max-retries 5
 ```
 
 ### API Key Override
 
 ```bash
-ucli search --query "test" --api-key temporary-key-123
+unifai search --query "test" --api-key temporary-key-123
 ```
 
 ## Troubleshooting
@@ -207,7 +207,7 @@ ucli search --query "test" --api-key temporary-key-123
 ### Check Configuration
 
 ```bash
-ucli config show
+unifai config show
 ```
 
 This displays the effective configuration and shows which source (flag, env, or file) is being used.
@@ -215,13 +215,13 @@ This displays the effective configuration and shows which source (flag, env, or 
 ### Verify Installation
 
 ```bash
-ucli version
+unifai version
 ```
 
 ### Test API Connectivity
 
 ```bash
-ucli search --query "test" --json
+unifai search --query "test" --json
 ```
 
 ## Additional Resources

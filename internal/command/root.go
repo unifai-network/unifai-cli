@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	clierrors "unifai-cli/internal/errors"
+	clierrors "unifai/internal/errors"
 )
 
 type GlobalOptions struct {
@@ -19,7 +19,7 @@ func NewRootCommand() *cobra.Command {
 	opts := &GlobalOptions{}
 
 	root := &cobra.Command{
-		Use:           "ucli",
+		Use:           "unifai",
 		Short:         "CLI for Unifai search_services and invoke_service",
 		SilenceErrors: true,
 		SilenceUsage:  true,
