@@ -62,6 +62,11 @@ func Resolve(opts ResolveOptions) (EffectiveConfig, error) {
 		effective.APIKeySource = SourceEnv
 	}
 
+	if envEndpoint := strings.TrimSpace(os.Getenv(EndpointEnvVar)); envEndpoint != "" {
+		effective.Endpoint = strings.TrimRight(envEndpoint, "/")
+		effective.EndpointSource = SourceEnv
+	}
+
 	if strings.TrimSpace(opts.FlagAPIKey) != "" {
 		effective.APIKey = strings.TrimSpace(opts.FlagAPIKey)
 		effective.APIKeySource = SourceFlag

@@ -61,7 +61,8 @@ Command implementations using cobra framework:
 Configuration loading with priority hierarchy (flag > env > file):
 - `loader.go`: `Resolve()` function implements 3-tier priority system
 - `config.go`: Type definitions for `FileConfig` and `EffectiveConfig`
-- Priority: `--api-key` flag > `UNIFAI_AGENT_API_KEY` env > `~/.config/unifai-cli/config.yaml`
+- API Key Priority: `--api-key` flag > `UNIFAI_AGENT_API_KEY` env > `~/.config/unifai-cli/config.yaml`
+- Endpoint Priority: `--endpoint` flag > `UNIFAI_ENDPOINT` env > `~/.config/unifai-cli/config.yaml`
 - Default endpoint: `https://app.uniclaw.ai/api/v1/unifai`
 - Default timeout: 50s
 

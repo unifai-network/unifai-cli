@@ -52,6 +52,13 @@ API key source priority (highest to lowest):
 2. Environment variable: `UNIFAI_AGENT_API_KEY`
 3. Config file: `~/.config/unifai-cli/config.yaml`
 
+Endpoint source priority (highest to lowest):
+
+1. Command-line flag: `--endpoint`
+2. Environment variable: `UNIFAI_ENDPOINT`
+3. Config file: `~/.config/unifai-cli/config.yaml`
+4. Default: `https://app.uniclaw.ai/api/v1/unifai`
+
 ### Initialize Configuration
 
 Generate a config template:

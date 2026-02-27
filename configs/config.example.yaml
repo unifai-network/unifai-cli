@@ -1,5 +1,6 @@
 # unifai-cli configuration
 # You can also set API key from env: UNIFAI_AGENT_API_KEY
+# You can also set endpoint from env: UNIFAI_ENDPOINT
 apiKey: ""
 endpoint: "https://app.uniclaw.ai/api/v1/unifai"
 timeoutSeconds: 50

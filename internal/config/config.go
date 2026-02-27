@@ -8,8 +8,9 @@ import (
 )
 
 const (
-	DefaultEndpoint = "https://app.uniclaw.ai/api/v1/unifai"
-	APIKeyEnvVar    = "UNIFAI_AGENT_API_KEY"
+	DefaultEndpoint    = "https://app.uniclaw.ai/api/v1/unifai"
+	APIKeyEnvVar       = "UNIFAI_AGENT_API_KEY"
+	EndpointEnvVar     = "UNIFAI_ENDPOINT"
 )
 
 const defaultTimeout = 50 * time.Second
@@ -54,8 +55,9 @@ func DefaultConfigPath() (string, error) {
 func ExampleConfigYAML() string {
 	return fmt.Sprintf(`# unifai-cli configuration
 # Fill apiKey with your real key, or set %s in your shell.
+# Set endpoint via %s environment variable or keep default.
 apiKey: ""
 endpoint: %q
 timeoutSeconds: 50
-`, APIKeyEnvVar, DefaultEndpoint)
+`, APIKeyEnvVar, EndpointEnvVar, DefaultEndpoint)
 }

@@ -25,6 +25,13 @@ API key source priority (high to low):
 2. `UNIFAI_AGENT_API_KEY`
 3. `~/.config/unifai-cli/config.yaml`
 
+Endpoint source priority (high to low):
+
+1. `--endpoint`
+2. `UNIFAI_ENDPOINT`
+3. `~/.config/unifai-cli/config.yaml`
+4. Default: `https://app.uniclaw.ai/api/v1/unifai`
+
 Generate config template:
 
 ```bash
