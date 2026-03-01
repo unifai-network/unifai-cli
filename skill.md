@@ -29,9 +29,7 @@ unifai enables you to:
 
 - **Search services**: Find blockchain services and actions using natural language queries
 - **Invoke services**: Execute blockchain actions with customizable parameters and retry logic
-- **Manage configuration**: Configure API keys and endpoints with multiple priority levels
-
-Default API endpoint: `https://app.uniclaw.ai/api/v1/unifai`
+- **Manage configuration**: Configure API keys with multiple priority levels
 
 ## Installation
 
@@ -51,13 +49,6 @@ API key source priority (highest to lowest):
 1. Command-line flag: `--api-key`
 2. Environment variable: `UNIFAI_AGENT_API_KEY`
 3. Config file: `~/.config/unifai-cli/config.yaml`
-
-Endpoint source priority (highest to lowest):
-
-1. Command-line flag: `--endpoint`
-2. Environment variable: `UNIFAI_ENDPOINT`
-3. Config file: `~/.config/unifai-cli/config.yaml`
-4. Default: `https://app.uniclaw.ai/api/v1/unifai`
 
 ### Initialize Configuration
 
@@ -141,7 +132,6 @@ unifai search --query "swap tokens" --json
 
 ```yaml
 api_key: your-unifai-api-key
-endpoint: https://app.uniclaw.ai/api/v1/unifai
 ```
 
 ## Retry and Timeout Behavior

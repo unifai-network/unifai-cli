@@ -5,10 +5,6 @@ A Go CLI for Unifai actions with first-class support for:
 - `search_services` via `unifai search`
 - `invoke_service` via `unifai invoke`
 
-Default API endpoint:
-
-- `https://app.uniclaw.ai/api/v1/unifai`
-
 ## Commands
 
 - `unifai search --query "swap usdc to sol" --limit 10 --offset 0 --include-actions a,b`
@@ -24,13 +20,6 @@ API key source priority (high to low):
 1. `--api-key`
 2. `UNIFAI_AGENT_API_KEY`
 3. `~/.config/unifai-cli/config.yaml`
-
-Endpoint source priority (high to low):
-
-1. `--endpoint`
-2. `UNIFAI_ENDPOINT`
-3. `~/.config/unifai-cli/config.yaml`
-4. Default: `https://app.uniclaw.ai/api/v1/unifai`
 
 Generate config template:
 
