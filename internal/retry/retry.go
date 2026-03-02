@@ -14,27 +14,24 @@ func Do[T any](ctx context.Context, maxRetries int, initialBackoff time.Duration
 		initialBackoff = time.Second
 	}
 
-	var lastErr error
 	for attempt := 0; attempt <= maxRetries; attempt++ {
 		result, err := fn()
 		if err == nil {
 			return result, nil
 		}
-		lastErr = err
 
 		if attempt == maxRetries || (shouldRetry != nil && !shouldRetry(err)) {
 			return zero, err
 		}
 
 		backoff := initialBackoff << attempt
-		timer := time.NewTimer(backoff)
 		select {
 		case <-ctx.Done():
-			timer.Stop()
 			return zero, ctx.Err()
-		case <-timer.C:
+		case <-time.After(backoff):
 		}
 	}
 
-	return zero, lastErr
+	// unreachable: loop always returns on success, final attempt, or context cancellation
+	return zero, nil
 }

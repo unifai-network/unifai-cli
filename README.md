@@ -1,88 +1,8 @@
 # unifai-cli
 
-A Go CLI for Unifai actions with first-class support for:
+A Go CLI for searching and invoking blockchain services across Solana, Base, and Ethereum via the [Unifai](https://unifai.network) network.
 
-- `search_services` via `unifai search`
-- `invoke_service` via `unifai invoke`
-
-## Commands
-
-- `unifai search --query "swap usdc to sol" --limit 10 --offset 0 --include-actions a,b`
-- `unifai invoke --action "Meteora--29--..." --payload '{"x":1}' --max-retries 1`
-- `unifai config init`
-- `unifai config show`
-- `unifai version`
-
-## Auth and Config Priority
-
-API key source priority (high to low):
-
-1. `--api-key`
-2. `UNIFAI_AGENT_API_KEY`
-3. `~/.config/unifai-cli/config.yaml`
-
-Generate config template:
-
-```bash
-unifai config init
-```
-
-Show effective config and source:
-
-```bash
-unifai config show
-```
-
-Reference template: `configs/config.example.yaml`
-
-## Payload Compatibility
-
-`invoke` supports both payload object and payload string to match current TS behavior differences.
-
-- Inline JSON: `--payload '{"a":1}'`
-- Read from file: `--payload @payload.json`
-- Force parsing mode: `--payload-format auto|object|string`
-
-Behavior:
-
-- `auto` (default): valid JSON -> object; otherwise -> raw string
-- `object`: payload must be valid JSON
-- `string`: payload is sent as string
-
-## Retries and Timeout
-
-- `--max-retries` (default: `1`)
-- Exponential backoff: `1s`, `2s`, `4s`, ...
-- `--timeout` (default: `50s`)
-- Retry only on network failures and HTTP `5xx`
-
-## Output and Exit Codes
-
-- Default output: concise human-readable
-- `--json`: raw API response
-- Exit codes:
-  - `0`: success
-  - `1`: API/runtime error
-  - `2`: argument/usage error
-
-`invoke` default rendering normalizes result:
-
-- If response has `payload`, print `payload`
-- Otherwise print full response
-
-## Build and Test
-
-```bash
-make tidy
-make test
-make build
-```
-
-Binary output:
-
-- `bin/unifai`
-
-## Install
+## Installation
 
 ### Homebrew
 
@@ -91,40 +11,122 @@ brew tap unifai-network/homebrew-unifai-cli
 brew install unifai
 ```
 
-## Release
-
-### Local
+### From source
 
 ```bash
-# Snapshot package (no GitHub release)
-./scripts/release.sh --snapshot
-
-# Real release
-./scripts/release.sh
+git clone https://github.com/unifai-network/unifai-cli.git
+cd unifai-cli
+make build
+./bin/unifai version
 ```
 
-### GitHub Actions
+## Quick Start
 
-Workflow file: `.github/workflows/release.yml`
-
-Trigger by pushing a tag:
+1. Get an API key from [Unifai](https://unifai.network).
+2. Initialize configuration:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+unifai config init
 ```
 
-GoReleaser config: `.goreleaser.yaml`
+3. Edit `~/.config/unifai-cli/config.yaml` and add your API key.
+4. Run your first search:
 
-Release artifacts are published to:
+```bash
+unifai search --query "swap usdc to sol"
+```
 
-- `https://github.com/unifai-network/homebrew-unifai-cli/releases`
+## Commands
 
-This is required when `unifai-cli` source repository is private, so Homebrew can download assets anonymously.
+### search
 
-### Homebrew release setup (maintainer)
+Search available blockchain services and actions.
 
-1. Create tap repo: `unifai-network/homebrew-unifai-cli` (with `main` branch).
-2. Add repository secret `HOMEBREW_TAP_GITHUB_TOKEN` in `unifai-cli` GitHub Actions.
-3. Ensure the token can write to `unifai-network/homebrew-unifai-cli`.
-4. Push a tag (for example `v0.1.0`) to trigger release.
+```bash
+unifai search --query "swap usdc to sol"
+unifai search --query "transfer tokens" --limit 10 --offset 0
+unifai search --query "defi protocols" --include-actions action1,action2
+```
+
+### invoke
+
+Execute a blockchain action.
+
+```bash
+unifai invoke --action "Meteora--29--swap" --payload '{"amount":100}'
+unifai invoke --action "MyAction--1--execute" --payload @payload.json
+unifai invoke --action "MyAction--1--execute" --payload '{"x":1}' --max-retries 3 --timeout 60s
+```
+
+### config
+
+Manage configuration.
+
+```bash
+unifai config init    # Create config template
+unifai config show    # Show effective config and sources
+```
+
+### version
+
+Print build version.
+
+```bash
+unifai version
+```
+
+## Configuration
+
+### Config file
+
+Location: `~/.config/unifai-cli/config.yaml`
+
+```yaml
+apiKey: "your-api-key"
+endpoint: ""
+timeoutSeconds: 50
+```
+
+Reference template: [`configs/config.example.yaml`](configs/config.example.yaml)
+
+### Priority order (highest to lowest)
+
+| Setting  | Flag         | Environment variable   | Config file      |
+|----------|--------------|------------------------|------------------|
+| API key  | `--api-key`  | `UNIFAI_AGENT_API_KEY` | `apiKey`         |
+| Endpoint | `--endpoint` | `UNIFAI_ENDPOINT`      | `endpoint`       |
+| Timeout  | `--timeout`  | —                      | `timeoutSeconds` |
+
+## Payload formats
+
+`invoke` supports flexible payload handling:
+
+- Inline JSON: `--payload '{"a":1}'`
+- From file: `--payload @payload.json`
+- Force mode: `--payload-format auto|object|string`
+
+| Mode     | Behavior                                         |
+|----------|--------------------------------------------------|
+| `auto`   | Valid JSON parsed as object; otherwise raw string |
+| `object` | Must be valid JSON; error if not                  |
+| `string` | Sent as raw string                                |
+
+## Output and exit codes
+
+- Default: concise human-readable output
+- `--json`: raw API JSON response
+- `invoke` extracts `payload` field from response when present
+
+| Exit code | Meaning              |
+|-----------|----------------------|
+| 0         | Success              |
+| 1         | API / runtime error  |
+| 2         | Argument/usage error |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE)
