@@ -35,8 +35,7 @@ checksum:
 release:
   github:
     owner: unifai-network
-    name: homebrew-unifai-cli
-  replace_existing_artifacts: true
+    name: unifai-cli
 
 brews:
   - name: unifai
