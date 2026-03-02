@@ -117,16 +117,16 @@ No test files currently present in codebase.
 - Config: `.goreleaser.yaml`
 - Builds for: linux/darwin/windows on amd64/arm64
 - Archives: tar.gz (zip for Windows)
-- Publishes to: `unifai-network/homebrew-unifai-cli` repo (not source repo)
+- Publishes releases to this repo, Homebrew formula to `unifai-network/homebrew-unifai-cli`
 - Requires: `HOMEBREW_TAP_GITHUB_TOKEN` secret for GitHub Actions
 
 ### Why Separate Homebrew Repo?
-Release artifacts are published to `homebrew-unifai-cli` repo to enable anonymous downloads when the source repo is private.
+The `homebrew-unifai-cli` repo is the Homebrew tap that hosts the formula. Release artifacts are published to this repo's GitHub Releases.
 
 ### Homebrew Installation
 ```bash
 brew tap unifai-network/homebrew-unifai-cli
-brew install ucli
+brew install unifai
 ```
 
 ## Configuration

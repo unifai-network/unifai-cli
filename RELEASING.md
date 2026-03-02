@@ -36,8 +36,8 @@ GoReleaser config: `.goreleaser.yaml`
 
 ## Where artifacts go
 
-Release artifacts are published to `unifai-network/homebrew-unifai-cli`, not this repository.
-This allows Homebrew to download assets anonymously even when the source repo is private.
+Release artifacts (binaries, checksums) are published to this repository's GitHub Releases.
+The Homebrew formula is pushed to `unifai-network/homebrew-unifai-cli` which serves as the Homebrew tap.
 
 ## Homebrew tap setup (one-time)
 
