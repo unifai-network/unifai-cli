@@ -209,6 +209,12 @@ unifai search --query "NBA scores"
 unifai invoke --action "ESPN--176--RetrieveNBAScoreboard" --payload '{"dates":"20260301"}' --json
 ```
 
+## Security Model
+
+- **No private keys are sent to the API.** The `UNIFAI_AGENT_API_KEY` authenticates requests but does not grant custody of any wallet or funds.
+- **On-chain transactions require local signing.** When you invoke a DeFi action (swap, lend, etc.), the API returns an unsigned transaction and a link (e.g., `https://tx.unifai.network/tx/...`). You must open the link, review the transaction, and sign it with your own wallet. Nothing executes on-chain without your explicit approval.
+- **Read-only actions return data directly.** Searches, price lookups, Twitter queries, and other non-transactional actions return results inline with no signing step.
+
 ## When to Use This Skill
 
 Use unifai when you need to:
