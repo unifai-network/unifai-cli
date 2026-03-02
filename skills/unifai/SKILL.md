@@ -1,6 +1,6 @@
 ---
 name: unifai
-description: Unifai CLI for searching and invoking services across DeFi, token data, social media, web search, news, travel, sports, and more.
+description: UnifAI CLI for searching and invoking services across DeFi, token data, social media, web search, news, travel, sports, and more.
 allowed-tools: Bash(unifai:*)
 version: 1.0.0
 metadata:
@@ -22,7 +22,7 @@ metadata:
 
 # unifai
 
-A CLI for searching and invoking services on the Unifai network. Supports 40+ services across DeFi, token data, social media, web search, news, travel, sports, and utilities.
+A CLI for searching and invoking services on the UnifAI network. Supports 40+ services across DeFi, token data, social media, web search, news, travel, sports, and utilities.
 
 ## What it does
 

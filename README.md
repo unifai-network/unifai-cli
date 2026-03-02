@@ -1,6 +1,6 @@
 # unifai-cli
 
-A Go CLI for searching and invoking services on the [Unifai](https://unifai.network) network — DeFi, token data, social media, web search, news, travel, sports, and more.
+A Go CLI for searching and invoking services on the [UnifAI](https://unifai.network) network — DeFi, token data, social media, web search, news, travel, sports, and more.
 
 ## Installation
 
@@ -22,7 +22,7 @@ make build
 
 ## Quick Start
 
-1. Get an API key from [Unifai](https://unifai.network).
+1. Get an API key from [UnifAI Console](https://console.unifai.network/).
 2. Initialize configuration:
 
 ```bash

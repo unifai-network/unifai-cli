@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-`unifai-cli` (binary: `unifai`) is a Go CLI tool for interacting with the Unifai network API. It provides two primary operations: searching for services and invoking actions across 40+ integrated providers spanning DeFi, token data, social media, web search, news, travel, sports, and utilities.
+`unifai-cli` (binary: `unifai`) is a Go CLI tool for interacting with the UnifAI network API. It provides two primary operations: searching for services and invoking actions across 40+ integrated providers spanning DeFi, token data, social media, web search, news, travel, sports, and utilities.
 
 ## Development Commands
 
