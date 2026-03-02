@@ -1,6 +1,7 @@
 ---
 name: unifai
-description: Unifai CLI for searching and invoking blockchain services across multiple chains including Solana, Base, and Ethereum.
+description: Unifai CLI for searching and invoking services across DeFi, token data, social media, web search, news, travel, sports, and more.
+allowed-tools: Bash(unifai:*)
 version: 1.0.0
 metadata:
   openclaw:
@@ -21,15 +22,26 @@ metadata:
 
 # unifai
 
-A Go CLI for Unifai actions with first-class support for searching and invoking blockchain services across multiple chains.
+A CLI for searching and invoking services on the Unifai network. Supports 40+ services across DeFi, token data, social media, web search, news, travel, sports, and utilities.
 
 ## What it does
 
 unifai enables you to:
 
-- **Search services**: Find blockchain services and actions using natural language queries
-- **Invoke services**: Execute blockchain actions with customizable parameters and retry logic
+- **Search services**: Find services and actions using natural language queries
+- **Invoke services**: Execute actions with customizable parameters and retry logic
 - **Manage configuration**: Configure API keys with multiple priority levels
+
+### Available service categories
+
+- **DeFi**: Swap, lend, borrow, provide liquidity (Aave, Uniswap, Jupiter, Meteora, Pendle, Compound, 1inch, and more)
+- **Token & market data**: Prices, OHLCV, security analysis (Birdeye, CoinGecko, DexScreener, DefiLlama, GoPlusSecurity)
+- **Wallet & chain data**: Token balances across Solana, Ethereum, Base, BSC, Polygon
+- **Social media**: Twitter/X search, user timelines, tweet threads
+- **Web search & news**: General search, Google news, financial data (SerpAPI, Tavily)
+- **Travel**: Flight and hotel search
+- **Sports**: NBA scores, soccer results (ESPN)
+- **Utilities**: Math, time, domain availability, Solana rent reclaimer
 
 ## Installation
 
@@ -50,6 +62,8 @@ API key source priority (highest to lowest):
 2. Environment variable: `UNIFAI_AGENT_API_KEY`
 3. Config file: `~/.config/unifai-cli/config.yaml`
 
+> **Note**: Setting `UNIFAI_AGENT_API_KEY` as an environment variable is recommended. The config file works too, but OpenClaw's skill check only detects the environment variable.
+
 ### Initialize Configuration
 
 Generate a config template:
@@ -68,14 +82,23 @@ unifai config show
 
 ### Search for Services
 
-Search for blockchain services using natural language:
+Search for services using natural language:
 
 ```bash
-# Basic search
+# DeFi
 unifai search --query "swap usdc to sol"
 
-# Search with pagination
-unifai search --query "transfer tokens" --limit 10 --offset 0
+# Token data
+unifai search --query "get bitcoin price"
+
+# Social media
+unifai search --query "search twitter for AI news"
+
+# Travel
+unifai search --query "find flights from NYC to London"
+
+# With pagination
+unifai search --query "lending protocols" --limit 10 --offset 0
 
 # Include specific actions
 unifai search --query "defi protocols" --include-actions action1,action2
@@ -83,7 +106,7 @@ unifai search --query "defi protocols" --include-actions action1,action2
 
 ### Invoke Services
 
-Execute blockchain actions with JSON payloads:
+Execute actions with JSON payloads:
 
 ```bash
 # Inline JSON payload
@@ -95,6 +118,8 @@ unifai invoke --action "MyAction--1--execute" --payload @payload.json
 # With custom retries and timeout
 unifai invoke --action "MyAction--1--execute" --payload '{"x":1}' --max-retries 3 --timeout 60s
 ```
+
+**Tip**: Parameter names vary by action (e.g., SerpAPI uses `q`, Twitter uses `query`). Use `unifai search --query "..." --json` to see the expected payload schema for each action before invoking.
 
 ### Payload Formats
 
@@ -131,7 +156,7 @@ unifai search --query "swap tokens" --json
 ### Example Configuration
 
 ```yaml
-api_key: your-unifai-api-key
+apiKey: your-unifai-api-key
 ```
 
 ## Retry and Timeout Behavior
@@ -156,28 +181,46 @@ unifai search --query "swap usdc to sol on solana"
 unifai invoke --action "Meteora--29--swap" --payload '{"fromToken":"USDC","toToken":"SOL","amount":100}'
 ```
 
-### Bridge Assets
+### Search Twitter
 
 ```bash
-unifai search --query "bridge eth to base"
-unifai invoke --action "Bridge--1--transfer" --payload '{"chain":"base","amount":0.1}'
+unifai search --query "search tweets"
+unifai invoke --action "Twitter--68--searchTweets" --payload '{"query":"AI agents","type":"Top"}' --json
 ```
 
-### Check Service Status
+### Search Flights
 
 ```bash
-unifai search --query "protocol health check" --json
+unifai search --query "find flights"
+unifai invoke --action "SerpAPI--21--flightSearch" --payload '{"departure_id":"SFO","arrival_id":"JFK","outbound_date":"2026-04-01","type":2}' --json
+```
+
+### Search Hotels
+
+```bash
+unifai search --query "find hotels"
+unifai invoke --action "SerpAPI--21--hotelSearch" --payload '{"q":"hotels in Tokyo","check_in_date":"2026-04-01","check_out_date":"2026-04-03"}' --json
+```
+
+### NBA Scores
+
+```bash
+unifai search --query "NBA scores"
+unifai invoke --action "ESPN--176--RetrieveNBAScoreboard" --payload '{"dates":"20260301"}' --json
 ```
 
 ## When to Use This Skill
 
 Use unifai when you need to:
 
-- Search for blockchain services and actions across multiple chains
-- Execute on-chain transactions programmatically
-- Integrate Unifai capabilities into scripts and automation workflows
-- Quickly test blockchain service invocations with retry logic
-- Query available DeFi protocols and their capabilities
+- Search for services and actions across 40+ integrated providers
+- Execute DeFi transactions (swap, lend, borrow, provide liquidity)
+- Look up token prices, security data, or market analytics
+- Search Twitter/X or fetch user timelines
+- Search the web, news, or financial data
+- Find flights, hotels, or sports scores
+- Check wallet balances across multiple chains
+- Integrate any of the above into scripts and automation workflows
 
 ## Advanced Features
 

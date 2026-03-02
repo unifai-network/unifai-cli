@@ -1,6 +1,6 @@
 # unifai-cli
 
-A Go CLI for searching and invoking blockchain services across Solana, Base, and Ethereum via the [Unifai](https://unifai.network) network.
+A Go CLI for searching and invoking services on the [Unifai](https://unifai.network) network — DeFi, token data, social media, web search, news, travel, sports, and more.
 
 ## Installation
 
