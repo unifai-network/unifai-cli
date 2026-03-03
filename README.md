@@ -2,6 +2,22 @@
 
 A Go CLI for searching and invoking services on the [UnifAI](https://unifai.network) network — DeFi, token data, social media, web search, news, travel, sports, and more.
 
+> **Note:** This Go CLI supports search and invoke only. It **does not support transaction signing**. For full functionality including autonomous transaction signing (Solana, EVM, Polymarket, Hyperliquid, Jito bundles, etc.), use the **recommended** JS CLI from the [unifai-sdk](https://github.com/unifai-network/unifai-sdk-js) package:
+>
+> ```bash
+> npx -p unifai-sdk unifai search --query "swap usdc to sol"
+> npx -p unifai-sdk unifai invoke --action "Jupiter--5--swap" --payload '{"amount":100}' --sign
+> ```
+>
+> Or install globally:
+>
+> ```bash
+> npm install -g unifai-sdk
+> unifai search --query "swap usdc to sol"
+> ```
+>
+> See more at [unifai-sdk-js](https://github.com/unifai-network/unifai-sdk-js).
+
 ## Installation
 
 ### Homebrew
@@ -50,7 +66,7 @@ unifai search --query "defi protocols" --include-actions action1,action2
 
 ### invoke
 
-Execute a blockchain action.
+Execute a blockchain action. Returns a response with an approval link for on-chain transactions. Transaction signing is **not supported** in this Go CLI — use the [JS CLI](https://github.com/unifai-network/unifai-sdk-js) for autonomous signing.
 
 ```bash
 unifai invoke --action "Meteora--29--swap" --payload '{"amount":100}'
