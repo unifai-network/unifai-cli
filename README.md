@@ -2,7 +2,7 @@
 
 A Go CLI for searching and invoking services on the [UnifAI](https://unifai.network) network — DeFi, token data, social media, web search, news, travel, sports, and more.
 
-> **Note:** This Go CLI supports search and invoke only. It **does not support transaction signing**. For full functionality including autonomous transaction signing (Solana, EVM, Polymarket, Hyperliquid, Jito bundles, etc.), use the **recommended** JS CLI from the [unifai-sdk](https://github.com/unifai-network/unifai-sdk-js) package:
+> **Note:** This Go CLI supports search and invoke only. It **does not support transaction signing**. For full functionality including autonomous transaction signing (Solana, EVM, Polymarket, Hyperliquid, Jito bundles, etc.), use the **recommended** JS CLI from the [unifai-sdk-js](https://github.com/unifai-network/unifai-sdk-js?tab=readme-ov-file#using-the-cli) package:
 >
 > ```bash
 > npx -p unifai-sdk unifai search --query "swap usdc to sol"
@@ -16,7 +16,7 @@ A Go CLI for searching and invoking services on the [UnifAI](https://unifai.netw
 > unifai search --query "swap usdc to sol"
 > ```
 >
-> See more at [unifai-sdk-js](https://github.com/unifai-network/unifai-sdk-js).
+> See more at [unifai-sdk-js](https://github.com/unifai-network/unifai-sdk-js?tab=readme-ov-file#using-the-cli).
 
 ## Installation
 
@@ -66,7 +66,7 @@ unifai search --query "defi protocols" --include-actions action1,action2
 
 ### invoke
 
-Execute a blockchain action. Returns a response with an approval link for on-chain transactions. Transaction signing is **not supported** in this Go CLI — use the [JS CLI](https://github.com/unifai-network/unifai-sdk-js) for autonomous signing.
+Execute a blockchain action. Returns a response with an approval link for on-chain transactions. Transaction signing is **not supported** in this Go CLI — use the [JS CLI](https://github.com/unifai-network/unifai-sdk-js?tab=readme-ov-file#using-the-cli) for autonomous signing.
 
 ```bash
 unifai invoke --action "Meteora--29--swap" --payload '{"amount":100}'
